@@ -5,7 +5,9 @@ import (
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 	"image"
+	"image/color"
 	"io/ioutil"
+	"log"
 )
 
 const (
@@ -17,8 +19,10 @@ var (
 	ttFont *truetype.Font
 )
 
-func loadFont() {
+func init() {
 	filename := FontPath + "/" + FontFile
+	log.Printf("Loading font from [%s] ...\n", filename)
+
 	fontBytes, err := ioutil.ReadFile(filename)
 	if err != nil {
 		panic(err)
@@ -29,47 +33,44 @@ func loadFont() {
 	}
 }
 
-func draw_key(img *image.RGBA, square_size, start_x, start_y int) {
+func drawKey(img *image.RGBA, col color.Color, squareSize, startX, startY int) {
 
-	fontSize := float64(square_size) / 2.5
-	font_dy := int((start_y - int(fontSize)) / 2)
-	font_dx := int((start_x - int(fontSize/2)) / 2)
+	fontSize := float64(squareSize) / 2.5
 
 	d := &font.Drawer{
 		Dst: img,
-		Src: image.White,
+		Src: &image.Uniform{col},
 		Face: truetype.NewFace(ttFont, &truetype.Options{
 			Size:    fontSize,
 			DPI:     72,
 			Hinting: font.HintingNone,
 		}),
 	}
-	d.Dot = fixed.P(100, 100)
 
 	rankLabels := "87654321"
-	pos_x_1 := font_dx
-	pos_x_2 := font_dx + int(8.5*float64(square_size))
-	pos_y := start_y + int(square_size/6)
+	pos_x_1 := startX/2 - int(fontSize/2.)
+	pos_x_2 := pos_x_1 + int(8.5*float64(squareSize))
+	posY := startY + int(fontSize+float64(squareSize)/6.)
 
 	for _, c := range rankLabels {
 		label := string(c)
-		d.Dot = fixed.P(pos_x_1, pos_y)
+		d.Dot = fixed.P(pos_x_1, posY)
 		d.DrawString(label)
-		d.Dot = fixed.P(pos_x_2, pos_y)
+		d.Dot = fixed.P(pos_x_2, posY)
 		d.DrawString(label)
-		pos_y += square_size
+		posY += squareSize
 	}
 
 	fileLabels := "abcdefgh"
-	pos_x := start_x + int(square_size/4) + font_dx
-	pos_y_1 := start_y + font_dy
-	pos_y_2 := start_y + 8*square_size + font_dy
+	posX := startX + int(squareSize/4)
+	pos_y_1 := startY - int(fontSize/1.5)
+	pos_y_2 := pos_y_1 + int(8.5*float64(squareSize))
 	for _, c := range fileLabels {
 		label := string(c)
-		d.Dot = fixed.P(pos_x, pos_y_1)
+		d.Dot = fixed.P(posX, pos_y_1)
 		d.DrawString(label)
-		d.Dot = fixed.P(pos_x, pos_y_2)
+		d.Dot = fixed.P(posX, pos_y_2)
 		d.DrawString(label)
-		pos_x += square_size
+		posX += squareSize
 	}
 }

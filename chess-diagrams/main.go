@@ -7,15 +7,10 @@ import (
 )
 
 func main() {
-	log.Println("Loading images ...")
-	loadPieceImages()
-	log.Println("Loading TrueType font ...")
-	loadFont()
-
 	router := http.NewServeMux()
 	router.HandleFunc("/", handler)
 
-	log.Println("CustomerServer: Listening on http://localhost:8080/ ...")
+	log.Println("chess-diagrams: Listening on http://localhost:8080/ ...")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
 

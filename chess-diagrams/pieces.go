@@ -3,6 +3,7 @@ package main
 import (
 	"image"
 	"image/png"
+	"log"
 	"os"
 	"unicode"
 )
@@ -16,19 +17,13 @@ var (
 	pieceImages   map[string]image.Image
 )
 
-func loadPieceImages() {
+func init() {
+	log.Printf("Loading piece images from [%s] ...\n", ImagePath)
+
 	pieceImages = make(map[string]image.Image)
 	for _, name := range allPieceNames {
 		img := loadPieceImage(name)
 		pieceImages[name] = img
-	}
-}
-
-func fenLetterToPieceName(char rune) string {
-	if unicode.IsUpper(char) {
-		return "w" + string(unicode.ToLower(char))
-	} else {
-		return "b" + string(char)
 	}
 }
 
@@ -41,4 +36,12 @@ func loadPieceImage(piece string) image.Image {
 
 	img, err := png.Decode(infile)
 	return img
+}
+
+func fenLetterToPieceName(char rune) string {
+	if unicode.IsUpper(char) {
+		return "w" + string(unicode.ToLower(char))
+	} else {
+		return "b" + string(char)
+	}
 }

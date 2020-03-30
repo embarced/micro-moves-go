@@ -97,7 +97,7 @@ func drawDiagramForFen(fen string) image.Image {
 	pieces := fenGroups[0]
 
 	drawPieces(img, SquareSize, BorderSize, BorderSize, pieces)
-	draw_key(&img, SquareSize, 20, 20)
+	drawKey(&img, BoardColorKey, SquareSize, 20, 20)
 
 	return &img
 }
