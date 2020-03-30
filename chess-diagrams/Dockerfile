@@ -10,9 +10,13 @@ RUN make deps
 ADD . /build/
 RUN make build-docker
 
+
 FROM scratch
+
 COPY images /app/images/
 COPY fonts /app/fonts/
+COPY html /app/html/
+
 COPY --from=builder /build/chess-diagrams /app/
 WORKDIR /app
 
