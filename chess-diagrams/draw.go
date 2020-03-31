@@ -4,9 +4,7 @@ import (
 	"image"
 	"image/color"
 	"image/draw"
-	"strconv"
 	"strings"
-	"unicode"
 )
 
 const (
@@ -53,37 +51,6 @@ func drawBoard(img image.RGBA, squareSize int, startX int, startY int, light col
 		}
 		drawRectangle(img, startX+x*squareSize, startY+y*squareSize, squareSize, squareSize, fill)
 	}
-}
-
-// Draws chess pieces into a given image.
-func drawPieces(img image.RGBA, square_size, start_x, start_y int, pieces string) {
-
-	ranks := strings.Split(pieces, "/")
-
-	for rank_no, rank := range ranks {
-		file_no := 0
-		for _, char := range rank {
-			if unicode.IsDigit(char) {
-				n, _ := strconv.Atoi(string(char))
-				file_no += n
-			} else {
-				pieceName := fenLetterToPieceName(char)
-				posX := start_x + square_size*file_no
-				posY := start_y + square_size*rank_no
-				drawPiece(img, square_size, posX, posY, pieceName)
-				file_no += 1
-			}
-		}
-	}
-
-}
-
-func drawPiece(img image.RGBA, square_size, posX, posY int, piece string) {
-	pImg := pieceImages[piece]
-
-	rect := image.Rect(posX, posY, posX+square_size, posY+square_size)
-	point := image.Point{0, 0}
-	draw.Draw(&img, rect, pImg, point, 0)
 }
 
 // Creates an image for the given FEN position.

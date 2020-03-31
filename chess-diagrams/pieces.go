@@ -2,9 +2,12 @@ package main
 
 import (
 	"image"
+	"image/draw"
 	"image/png"
 	"log"
 	"os"
+	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -36,6 +39,37 @@ func loadPieceImage(piece string) image.Image {
 
 	img, err := png.Decode(infile)
 	return img
+}
+
+// Draws chess pieces into a given image.
+func drawPieces(img image.RGBA, square_size, start_x, start_y int, pieces string) {
+
+	ranks := strings.Split(pieces, "/")
+
+	for rank_no, rank := range ranks {
+		file_no := 0
+		for _, char := range rank {
+			if unicode.IsDigit(char) {
+				n, _ := strconv.Atoi(string(char))
+				file_no += n
+			} else {
+				pieceName := fenLetterToPieceName(char)
+				posX := start_x + square_size*file_no
+				posY := start_y + square_size*rank_no
+				drawPiece(img, square_size, posX, posY, pieceName)
+				file_no += 1
+			}
+		}
+	}
+
+}
+
+func drawPiece(img image.RGBA, square_size, posX, posY int, piece string) {
+	pImg := pieceImages[piece]
+
+	rect := image.Rect(posX, posY, posX+square_size, posY+square_size)
+	point := image.Point{0, 0}
+	draw.Draw(&img, rect, pImg, point, 0)
 }
 
 func fenLetterToPieceName(char rune) string {
