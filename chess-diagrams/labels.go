@@ -1,4 +1,4 @@
-package main
+package chessdiagrams
 
 import (
 	"github.com/golang/freetype/truetype"
