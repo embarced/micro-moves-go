@@ -25,21 +25,21 @@ func createImage(width, height int, c color.Color) image.RGBA {
 	lowRight := image.Point{width, height}
 
 	img := image.NewRGBA(image.Rectangle{upLeft, lowRight})
-	drawRectangle(*img, 0, 0, width, height, c)
+	fillRectangle(img, 0, 0, width, height, c)
 
 	return *img
 }
 
-func drawRectangle(img image.RGBA, startX, startY, width, height int, c color.Color) {
+func fillRectangle(img *image.RGBA, startX, startY, width, height int, c color.Color) {
 	rect := image.Rectangle{
 		Min: image.Point{startX, startY},
 		Max: image.Point{startX + width, startY + height},
 	}
-	draw.Draw(&img, rect, &image.Uniform{c}, image.Point{}, draw.Src)
+	draw.Draw(img, rect, &image.Uniform{c}, image.Point{}, draw.Src)
 }
 
 // Draw a checkered 8x8 chess board into a given images.
-func drawBoard(img image.RGBA, squareSize int, startX int, startY int, light color.Color, dark color.Color) {
+func drawBoard(img *image.RGBA, squareSize int, startX int, startY int, light color.Color, dark color.Color) {
 	var x, y int
 	var fill color.Color
 	for square := 0; square < 64; square++ {
@@ -49,7 +49,7 @@ func drawBoard(img image.RGBA, squareSize int, startX int, startY int, light col
 		} else {
 			fill = dark
 		}
-		drawRectangle(img, startX+x*squareSize, startY+y*squareSize, squareSize, squareSize, fill)
+		fillRectangle(img, startX+x*squareSize, startY+y*squareSize, squareSize, squareSize, fill)
 	}
 }
 
@@ -58,12 +58,13 @@ func drawBoard(img image.RGBA, squareSize int, startX int, startY int, light col
 func drawDiagramForFen(fen string) image.Image {
 
 	img := createImage(BoardSize, BoardSize, BoardColorBorder)
-	drawBoard(img, SquareSize, BorderSize, BorderSize, BoardColorLight, BoardColorDark)
+
+	drawBoard(&img, SquareSize, BorderSize, BorderSize, BoardColorLight, BoardColorDark)
 
 	fenGroups := strings.Split(fen, " ")
 	pieces := fenGroups[0]
 
-	drawPieces(img, SquareSize, BorderSize, BorderSize, pieces)
+	drawPieces(&img, SquareSize, BorderSize, BorderSize, pieces)
 	drawKey(&img, BoardColorKey, SquareSize, 20, 20)
 
 	return &img

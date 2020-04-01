@@ -42,7 +42,7 @@ func loadPieceImage(piece string) image.Image {
 }
 
 // Draws chess pieces into a given image.
-func drawPieces(img image.RGBA, square_size, start_x, start_y int, pieces string) {
+func drawPieces(img *image.RGBA, square_size, start_x, start_y int, pieces string) {
 
 	ranks := strings.Split(pieces, "/")
 
@@ -64,12 +64,12 @@ func drawPieces(img image.RGBA, square_size, start_x, start_y int, pieces string
 
 }
 
-func drawPiece(img image.RGBA, square_size, posX, posY int, piece string) {
+func drawPiece(img *image.RGBA, square_size, posX, posY int, piece string) {
 	pImg := pieceImages[piece]
 
 	rect := image.Rect(posX, posY, posX+square_size, posY+square_size)
 	point := image.Point{0, 0}
-	draw.Draw(&img, rect, pImg, point, 0)
+	draw.Draw(img, rect, pImg, point, 0)
 }
 
 func fenLetterToPieceName(char rune) string {
