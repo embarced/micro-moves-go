@@ -47,29 +47,29 @@ func drawKey(img *image.RGBA, col color.Color, squareSize, startX, startY int) {
 		}),
 	}
 
-	rankLabels := "87654321"
-	pos_x_1 := startX/2 - int(fontSize/2.)
-	pos_x_2 := pos_x_1 + int(8.5*float64(squareSize))
+	const rankLabels = "87654321"
+	posX1 := startX/2 - int(fontSize/2.)
+	posX2 := posX1 + int(8.5*float64(squareSize))
 	posY := startY + int(fontSize+float64(squareSize)/6.)
 
 	for _, c := range rankLabels {
 		label := string(c)
-		d.Dot = fixed.P(pos_x_1, posY)
+		d.Dot = fixed.P(posX1, posY)
 		d.DrawString(label)
-		d.Dot = fixed.P(pos_x_2, posY)
+		d.Dot = fixed.P(posX2, posY)
 		d.DrawString(label)
 		posY += squareSize
 	}
 
-	fileLabels := "abcdefgh"
+	const fileLabels = "abcdefgh"
 	posX := startX + int(squareSize/4)
-	pos_y_1 := startY - int(fontSize/1.5)
-	pos_y_2 := pos_y_1 + int(8.5*float64(squareSize))
+	posY1 := startY - int(fontSize/1.5)
+	posY2 := posY1 + int(8.5*float64(squareSize))
 	for _, c := range fileLabels {
 		label := string(c)
-		d.Dot = fixed.P(posX, pos_y_1)
+		d.Dot = fixed.P(posX, posY1)
 		d.DrawString(label)
-		d.Dot = fixed.P(posX, pos_y_2)
+		d.Dot = fixed.P(posX, posY2)
 		d.DrawString(label)
 		posX += squareSize
 	}

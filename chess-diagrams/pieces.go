@@ -42,32 +42,32 @@ func loadPieceImage(piece string) image.Image {
 }
 
 // Draws chess pieces into a given image.
-func drawPieces(img *image.RGBA, square_size, start_x, start_y int, pieces string) {
+func drawPieces(img *image.RGBA, squareSize, startX, startY int, pieces string) {
 
 	ranks := strings.Split(pieces, "/")
 
-	for rank_no, rank := range ranks {
-		file_no := 0
+	for rankNo, rank := range ranks {
+		fileNo := 0
 		for _, char := range rank {
 			if unicode.IsDigit(char) {
 				n, _ := strconv.Atoi(string(char))
-				file_no += n
+				fileNo += n
 			} else {
 				pieceName := fenLetterToPieceName(char)
-				posX := start_x + square_size*file_no
-				posY := start_y + square_size*rank_no
-				drawPiece(img, square_size, posX, posY, pieceName)
-				file_no += 1
+				posX := startX + squareSize*fileNo
+				posY := startY + squareSize*rankNo
+				drawPiece(img, squareSize, posX, posY, pieceName)
+				fileNo++
 			}
 		}
 	}
 
 }
 
-func drawPiece(img *image.RGBA, square_size, posX, posY int, piece string) {
+func drawPiece(img *image.RGBA, squareSize, posX, posY int, piece string) {
 	pImg := pieceImages[piece]
 
-	rect := image.Rect(posX, posY, posX+square_size, posY+square_size)
+	rect := image.Rect(posX, posY, posX+squareSize, posY+squareSize)
 	point := image.Point{0, 0}
 	draw.Draw(img, rect, pImg, point, 0)
 }
