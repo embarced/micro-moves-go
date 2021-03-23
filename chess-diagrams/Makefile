@@ -4,7 +4,10 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
+
 BINARY_NAME=chess-diagrams
+
+
 
 all: test build
 build:
@@ -20,3 +23,8 @@ clean:
 deps:
 	$(GOGET) golang.org/x/image/font
 	$(GOGET) github.com/golang/freetype
+
+docker-image:
+	docker build . -t chess-diagrams
+
+	
