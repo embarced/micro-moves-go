@@ -25,3 +25,5 @@ COPY --from=builder /build/chess-diagrams /app/
 WORKDIR /app
 
 CMD ["./chess-diagrams"]
+
+EXPOSE 8080/tcp
