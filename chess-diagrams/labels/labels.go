@@ -1,4 +1,4 @@
-package main
+package labels
 
 import (
 	"github.com/golang/freetype/truetype"
@@ -8,6 +8,8 @@ import (
 	"image/color"
 	"io/ioutil"
 	"log"
+
+	_ "github.com/micro-moves-go/chess-diagrams/testing" // https://brandur.org/fragments/testing-go-project-root
 )
 
 const (
@@ -33,7 +35,7 @@ func init() {
 	}
 }
 
-func drawKey(img *image.RGBA, col color.Color, squareSize, startX, startY int) {
+func DrawKey(img *image.RGBA, col color.Color, squareSize, startX, startY int) {
 
 	fontSize := float64(squareSize) / 2.5
 

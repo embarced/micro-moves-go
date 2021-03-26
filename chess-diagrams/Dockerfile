@@ -8,7 +8,7 @@ RUN apk add --update musl-dev
 RUN mkdir /build
 WORKDIR /build
 COPY Makefile /build/
-RUN make deps
+# RUN make deps
 
 ADD . /build/
 RUN make test

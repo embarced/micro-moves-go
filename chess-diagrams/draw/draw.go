@@ -1,6 +1,9 @@
-package main
+package draw
 
 import (
+	"github.com/micro-moves-go/chess-diagrams/pieces"
+	"github.com/micro-moves-go/chess-diagrams/labels"
+
 	"image"
 	"image/color"
 	"image/draw"
@@ -55,17 +58,17 @@ func drawBoard(img *image.RGBA, squareSize int, startX int, startY int, light co
 
 // Creates an image for the given FEN position.
 //
-func drawDiagramForFen(fen string) image.Image {
+func DrawDiagramForFen(fen string) image.Image {
 
 	img := createImage(BoardSize, BoardSize, BoardColorBorder)
 
 	drawBoard(&img, SquareSize, BorderSize, BorderSize, BoardColorLight, BoardColorDark)
 
 	fenGroups := strings.Split(fen, " ")
-	pieces := fenGroups[0]
+	pcs := fenGroups[0]
 
-	drawPieces(&img, SquareSize, BorderSize, BorderSize, pieces)
-	drawKey(&img, BoardColorKey, SquareSize, 20, 20)
+	pieces.DrawPieces(&img, SquareSize, BorderSize, BorderSize, pcs)
+	labels.DrawKey(&img, BoardColorKey, SquareSize, 20, 20)
 
 	return &img
 }

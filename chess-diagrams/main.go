@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/micro-moves-go/chess-diagrams/draw"
 	"image/png"
 	"io"
 	"log"
@@ -32,7 +33,7 @@ func boardHandler(w http.ResponseWriter, r *http.Request) {
 		fen = fens[0]
 	}
 
-	img := drawDiagramForFen(fen)
+	img := draw.DrawDiagramForFen(fen)
 	png.Encode(w, img)
 }
 

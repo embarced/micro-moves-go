@@ -1,14 +1,16 @@
-package main
+package draw
 
 import (
 	"testing"
+	_ "github.com/micro-moves-go/chess-diagrams/testing"
 )
 
 const startingPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 func TestDrawDiagramForFen(t *testing.T) {
+
 	fen := startingPosition
-	img := drawDiagramForFen(fen)
+	img := DrawDiagramForFen(fen)
 
 	size := img.Bounds().Size()
 	if size.X != BoardSize {
@@ -22,6 +24,6 @@ func TestDrawDiagramForFen(t *testing.T) {
 func BenchmarkDrawDiagramForFen(b *testing.B) {
 	fen := startingPosition
 	for i := 0; i < b.N; i++ {
-		drawDiagramForFen(fen)
+		DrawDiagramForFen(fen)
 	}
 }

@@ -20,11 +20,5 @@ clean:
 		$(GOCLEAN)
 		rm -f $(BINARY_NAME)
 
-deps:
-	$(GOGET) golang.org/x/image/font
-	$(GOGET) github.com/golang/freetype
-
 docker-image:
 	docker build . -t chess-diagrams
-
-	

@@ -1,4 +1,4 @@
-package main
+package pieces
 
 import (
 	"image"
@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 	"unicode"
+
+	_ "github.com/micro-moves-go/chess-diagrams/testing" // https://brandur.org/fragments/testing-go-project-root
 )
 
 const (
@@ -42,7 +44,7 @@ func loadPieceImage(piece string) image.Image {
 }
 
 // Draws chess pieces into a given image.
-func drawPieces(img *image.RGBA, squareSize, startX, startY int, pieces string) {
+func DrawPieces(img *image.RGBA, squareSize, startX, startY int, pieces string) {
 
 	ranks := strings.Split(pieces, "/")
 
