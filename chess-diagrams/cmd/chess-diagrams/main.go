@@ -38,6 +38,6 @@ func boardHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	infile, _ := os.Open("html/index.html")
+	infile, _ := os.Open("assets/html/index.html")
 	io.Copy(w, infile)
 }

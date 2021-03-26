@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	ImagePath = "images/pieces/32"
+	ImagePath = "assets/images/pieces/32"
 )
 
 var (

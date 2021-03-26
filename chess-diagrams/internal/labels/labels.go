@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	FontPath = "fonts"
+	FontPath = "assets/fonts"
 	FontFile = "arial.ttf"
 )
 
