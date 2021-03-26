@@ -1,8 +1,8 @@
 package draw
 
 import (
-	"github.com/micro-moves-go/chess-diagrams/pieces"
-	"github.com/micro-moves-go/chess-diagrams/labels"
+	"github.com/micro-moves-go/chess-diagrams/internal/labels"
+	"github.com/micro-moves-go/chess-diagrams/internal/pieces"
 
 	"image"
 	"image/color"

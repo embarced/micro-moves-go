@@ -1,8 +1,8 @@
 package draw
 
 import (
+	_ "github.com/micro-moves-go/chess-diagrams/internal/testing"
 	"testing"
-	_ "github.com/micro-moves-go/chess-diagrams/testing"
 )
 
 const startingPosition = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"

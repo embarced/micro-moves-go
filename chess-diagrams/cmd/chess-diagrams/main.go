@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/micro-moves-go/chess-diagrams/draw"
+	"github.com/micro-moves-go/chess-diagrams/internal/draw"
 	"image/png"
 	"io"
 	"log"

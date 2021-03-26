@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	_ "github.com/micro-moves-go/chess-diagrams/testing" // https://brandur.org/fragments/testing-go-project-root
+	_ "github.com/micro-moves-go/chess-diagrams/internal/testing" // https://brandur.org/fragments/testing-go-project-root
 )
 
 const (
