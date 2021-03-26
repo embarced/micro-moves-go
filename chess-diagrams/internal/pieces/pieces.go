@@ -9,8 +9,6 @@ import (
 	"strconv"
 	"strings"
 	"unicode"
-
-	_ "github.com/micro-moves-go/chess-diagrams/internal/testing" // https://brandur.org/fragments/testing-go-project-root
 )
 
 const (
